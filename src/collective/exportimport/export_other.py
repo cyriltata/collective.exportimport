@@ -315,6 +315,8 @@ class ExportMembers(BaseExport):
         # Drop groups in which the user is a transitive member
         for group_id in group_ids:
             group = api.group.get(group_id)
+            if not group:
+                continue
             plone_group = group.getGroup()
             if userId in plone_group.getMemberIds():
                 groups.append(group_id)
